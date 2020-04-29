@@ -28,8 +28,8 @@ jobs:
 
     - name: Build with dotnet
       run: |
-        dotnet build --configuration Releasedotnet 
-        publish -c Release -o myapp 
+        dotnet build --configuration Release
+        dotnet publish -c Release -o myapp 
       working-directory: JouTest
 
     - name: dotnet publish
