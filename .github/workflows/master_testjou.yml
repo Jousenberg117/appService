@@ -31,7 +31,7 @@ jobs:
       working-directory: JouTest
 
     - name: dotnet publish
-      run: dotnet publish -c Release -o myapp 
+      run: dotnet publish -c Release -o ./myapp 
       working-directory: JouTest
 
     - name: Deploy to Azure Web App
