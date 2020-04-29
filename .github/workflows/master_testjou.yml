@@ -8,6 +8,12 @@ on:
     branches:
       - master
 
+
+env:
+  AZURE_WEBAPP_NAME: testJou    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  DOTNET_VERSION: '3.1.201'           # set this to the dot net version to use
+
 jobs:
   build-and-deploy:
     runs-on: windows-latest
@@ -18,7 +24,7 @@ jobs:
     - name: Set up .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '3.1.201'
+        dotnet-version: ${{ env.DOTNET_VERSION }} 
 
     - name: Build with dotnet
       run: dotnet build --configuration Release
@@ -30,7 +36,7 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
       with:
-        app-name: 'testjou'
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_3deff9fbb94045f297e5dbeeea379ae2 }}
-        package: ${{env.DOTNET_ROOT}}/myapp 
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
