@@ -27,7 +27,9 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }} 
 
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: |
+        dotnet build --configuration Releasedotnet 
+        publish -c Release -o myapp 
       working-directory: JouTest
 
     - name: dotnet publish
