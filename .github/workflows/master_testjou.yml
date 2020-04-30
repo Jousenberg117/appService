@@ -31,13 +31,14 @@ jobs:
       working-directory: JouTest
 
     - name: dotnet publish
-      run: dotnet publish -c Release -o ./myapp 
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/testJou
+ 
       working-directory: JouTest
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        app-name: 'testjou'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_3deff9fbb94045f297e5dbeeea379ae2 }}
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_fd751ff88f6340f19c8cff73cc844f59 }}
+        package: ${{env.DOTNET_ROOT}}/testJou  
